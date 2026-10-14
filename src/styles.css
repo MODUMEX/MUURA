@@ -153,7 +153,11 @@ textarea { resize: vertical; }
 .login-caja .campo + .campo { margin-top: 0; }
 .login-logo { width: 240px; margin: 0 auto; }
 .login-sub { text-align: center; color: var(--gris); margin: -4px 0 8px; font-size: 15px; }
-.clave { display: flex; gap: 6px; }
+.clave { position: relative; }
+.clave input { padding-right: 44px; }
+.clave .ojo { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: var(--gris); padding: 6px 8px; display: flex; }
+.clave .ojo:hover { color: var(--tinta); opacity: 1; }
+.clave .ojo:focus-visible { outline: 2px solid var(--tinta); border-radius: 4px; }
 .exito { padding: 10px 12px; background: #e8f5e9; color: #1b5e20; border-radius: 6px; }
 button.enlace { background: none; border: none; color: var(--gris); text-decoration: underline; padding: 2px; }
 button:disabled { opacity: 0.5; cursor: default; }
