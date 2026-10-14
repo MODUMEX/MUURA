@@ -110,22 +110,27 @@ export function vistaPlanta(m: Muro, p: Parametros): Vista {
   const e = p.espesorPanel
   const cara = 2
   const f: Figura[] = []
-  const alto = m.registro ? 45 : 25
+  const H = c.anchoPanel
+  const alto = Math.max(m.registro ? 45 : 25, H / 2 + 6)
   f.push({ t: 'rect', x: -12, y: -alto, w: 12, h: alto * 2, relleno: 'muro', trazo: 'fino' })
   f.push({ t: 'rect', x: L, y: -alto, w: 12, h: alto * 2, relleno: 'muro', trazo: 'fino' })
   const der = m.guardado === 'der'
   const g = Math.min(c.anchoGuardado, L)
   const gx = der ? L - g : 0
-  const gy = e / 2 + 4
-  f.push({ t: 'rect', x: gx, y: gy, w: g, h: c.anchoPanel, relleno: 'guardado', trazo: 'punteado' })
-  f.push({ t: 'texto', x: gx + g / 2, y: gy + c.anchoPanel / 2, s: ['ÁREA DE', 'GUARDADO'], tam: 2.2, ancla: 'middle', color: 'gris' })
-  f.push({ t: 'cota', x1: gx, y1: gy + c.anchoPanel, x2: gx + g, y2: gy + c.anchoPanel, off: -6, texto: metros(g), titulo: 'ÁREA DE GUARDADO' })
+  const n = c.piezas.length
+  f.push({ t: 'rect', x: gx, y: -H / 2, w: g, h: H, relleno: 'blanco', trazo: 'punteado' })
+  if (n > 0) {
+    const paso = g / n
+    const grueso = Math.max(1, Math.min(paso - 1, e))
+    for (let i = 0; i < n; i++) f.push({ t: 'rect', x: gx + i * paso + (paso - grueso) / 2, y: -H / 2, w: grueso, h: H, relleno: 'panel', trazo: 'fino', tinte: tinte(m.caraA, p) })
+  }
+  f.push({ t: 'cota', x1: gx, y1: H / 2, x2: gx + g, y2: H / 2, off: -6, texto: metros(g), titulo: 'ÁREA DE GUARDADO' })
   if (m.registro) {
     const rx = der ? gx - 80 : gx + g
     f.push({ t: 'rect', x: rx, y: -40, w: 80, h: 80, relleno: 'blanco', trazo: 'punteado' })
     f.push({ t: 'texto', x: rx + 40, y: 25, s: ['REGISTRO', 'DESMONTABLE', '0.80 X 0.80'], tam: 1.5, ancla: 'middle', color: 'azul' })
   }
-  const yc = m.registro ? -40 : -e / 2
+  const yc = -Math.max(m.registro ? 40 : e / 2, H / 2) - 2
   for (const t of d.paneles) {
     f.push({ t: 'rect', x: t.x, y: -e / 2, w: t.w, h: e, relleno: 'nucleo', trazo: 'ninguno' })
     f.push({ t: 'rect', x: t.x, y: -e / 2, w: t.w, h: cara, relleno: 'panel', trazo: 'ninguno', tinte: tinte(m.caraA, p) })
@@ -147,7 +152,7 @@ export function vistaPlanta(m: Muro, p: Parametros): Vista {
   f.push({ t: 'cota', x1: 0, y1: yc, x2: L, y2: yc, off: 23, texto: metros(L), titulo: 'LONGITUD MURO' })
   return {
     figuras: f,
-    caja: { x0: -12, y0: -alto, x1: L + 12, y1: Math.max(alto, gy + c.anchoPanel) },
+    caja: { x0: -12, y0: -alto, x1: L + 12, y1: alto },
     margen: { arriba: 30, abajo: 9, izq: 4, der: 4 },
   }
 }
@@ -156,11 +161,11 @@ export function vistaGuardado(m: Muro, p: Parametros): Vista {
   const c = calcularMuro(m, p)
   const f: Figura[] = []
   const n = c.piezas.length
-  const paso = p.guardadoPorPanel
-  const W = n * paso
+  const W = c.anchoGuardado
+  const paso = n > 0 ? W / n : p.guardadoPorPanel
   const H = c.anchoPanel
   const der = m.guardado === 'der'
-  const entrada = 70
+  const entrada = m.registro ? 95 : 70
   const xm = der ? W : -14
   f.push({ t: 'rect', x: xm, y: -15, w: 14, h: H + 30, relleno: 'muro', trazo: 'fino' })
   const r0 = H / 2 - 3
@@ -175,6 +180,11 @@ export function vistaGuardado(m: Muro, p: Parametros): Vista {
   for (let i = 0; i <= 4; i++) {
     const x = sx + (entrada / 4) * i
     f.push({ t: 'linea', x1: x, y1: r0 - 5, x2: x, y2: r0 + 11, trazo: 'grueso', color: 'negro' })
+  }
+  if (m.registro) {
+    const rx = der ? -80 : W
+    f.push({ t: 'rect', x: rx, y: H / 2 - 40, w: 80, h: 80, trazo: 'punteado' })
+    f.push({ t: 'texto', x: rx + 40, y: H / 2 + 28, s: ['REGISTRO', 'DESMONTABLE', '0.80 X 0.80'], tam: 1.5, ancla: 'middle', color: 'azul' })
   }
   f.push({ t: 'cota', x1: 0, y1: 0, x2: W, y2: 0, off: 8, texto: metros(W), titulo: 'ÁREA DE GUARDADO' })
   const xc = der ? W + 14 : -14
