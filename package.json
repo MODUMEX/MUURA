@@ -1,0 +1,27 @@
+{
+  "name": "constructor-muura",
+  "private": true,
+  "version": "0.6.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "probar": "esbuild scripts/probar-calculo.ts --bundle --platform=node --format=esm --outfile=.probar.mjs --log-level=warning && node .probar.mjs",
+    "probar-precios": "esbuild scripts/probar-precios.ts --bundle --platform=node --format=esm --outfile=.precios.mjs --log-level=warning && node .precios.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "jspdf": "^4.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "esbuild": "^0.21.5",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}
