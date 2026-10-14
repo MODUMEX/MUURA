@@ -10,3 +10,5 @@ scripts/probar-precios.ts
 .precios.mjs
 supabase/03_precios.sql
 tsconfig.tsbuildinfo
+prueba.html
+src/prueba.tsx
