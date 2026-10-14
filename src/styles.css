@@ -146,10 +146,13 @@ textarea { resize: vertical; }
 .barra .usuario small { color: #8a8a8a; font-size: 11px; }
 .barra .salir { background: transparent; border-color: #555; color: #ddd; padding: 4px 10px; font-size: 12px; }
 .login { min-height: 100vh; display: grid; place-items: center; background: #111; padding: 16px; }
-.login-caja { width: 100%; max-width: 360px; background: #fff; border-radius: 10px; padding: 28px 26px; display: flex; flex-direction: column; gap: 12px; }
+.login-caja { width: 100%; max-width: 440px; background: #fff; border-radius: 12px; padding: 36px 34px; display: flex; flex-direction: column; gap: 14px; font-size: 15px; }
+.login-caja .campo { font-size: 13px; }
+.login-caja input { padding: 10px 12px; font-size: 15px; }
+.login-caja button[type=submit] { padding: 11px 14px; font-size: 15px; }
 .login-caja .campo + .campo { margin-top: 0; }
-.login-logo { width: 190px; margin: 0 auto; }
-.login-sub { text-align: center; color: var(--gris); margin: -4px 0 6px; font-size: 13px; }
+.login-logo { width: 240px; margin: 0 auto; }
+.login-sub { text-align: center; color: var(--gris); margin: -4px 0 8px; font-size: 15px; }
 .clave { display: flex; gap: 6px; }
 .exito { padding: 10px 12px; background: #e8f5e9; color: #1b5e20; border-radius: 6px; }
 button.enlace { background: none; border: none; color: var(--gris); text-decoration: underline; padding: 2px; }
