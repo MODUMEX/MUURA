@@ -7,7 +7,8 @@
     <title>Constructor MUURA</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><div style="font-family:Segoe UI,Arial,sans-serif;padding:40px;text-align:center;color:#555">Cargando el Constructor MUURA…<br><small id="arranque-lento" style="display:none">Si no aparece en unos segundos, recargá con Ctrl + F5.</small></div></div>
+    <script>setTimeout(function(){var e=document.getElementById('arranque-lento');if(e)e.style.display='inline'},6000);window.addEventListener('error',function(ev){var r=document.getElementById('root');if(r&&!r.querySelector('.login,.app'))r.innerHTML='<div style="font-family:Segoe UI,Arial,sans-serif;padding:40px;text-align:center;color:#c62828">No se pudo cargar la app: '+(ev.message||'error desconocido')+'<br><small style="color:#555">Recargá con Ctrl + F5. Si sigue, mandale este mensaje a Sistemas.</small></div>'})</script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
